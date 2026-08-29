@@ -1,0 +1,7 @@
+__turbopack_load_page_chunks__("/accessibility", [
+  "static/chunks/3f1n__2-5_cr_.js",
+  "static/chunks/234egz3dxl5o0.js",
+  "static/chunks/212xukvylzuke.js",
+  "static/chunks/28rym64epi8v9.js",
+  "static/chunks/turbopack-3eykeuekk8a0i.js"
+])
