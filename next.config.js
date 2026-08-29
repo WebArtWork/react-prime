@@ -1,8 +1,16 @@
 module.exports = {
     reactStrictMode: process.env.NODE_ENV === 'production' ? false : true,
     trailingSlash: true,
-    publicRuntimeConfig: {
-        appVersion: process.env.npm_package_version || ''
+    env: {
+        NEXT_PUBLIC_APP_VERSION: process.env.npm_package_version || ''
+    },
+    turbopack: {
+        rules: {
+            '*.svg': {
+                loaders: ['@svgr/webpack'],
+                as: '*.js'
+            }
+        }
     },
     webpack(config) {
         config.module.rules.push({
