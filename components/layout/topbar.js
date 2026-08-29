@@ -1,6 +1,5 @@
 import { StyleClass } from '@/components/lib/styleclass/StyleClass';
 import { classNames } from '@/components/lib/utils/Utils';
-import { DocSearch } from '@docsearch/react';
 import Link from 'next/link';
 import pkg from 'package.json';
 import { useEffect, useRef } from 'react';
@@ -9,42 +8,11 @@ export default function Topbar(props) {
     const versionsRef = useRef(null);
     const versions = [
         {
-            name: 'v11',
-            version: '11.0.0',
-            url: 'https://v11.primereact.org'
-        },
-        {
             name: `v${pkg.version.split('.')[0]}`,
             version: pkg.version,
-            url: 'https://www.primereact.org'
-        },
-        {
-            name: 'v9',
-            version: '9.6.3',
-            url: 'https://v9.primereact.org'
+            url: 'https://github.com/WebArtWork/react-prime'
         }
     ];
-
-    {
-        /* doc https://docsearch.algolia.com/docs/api/#transformitems */
-    }
-
-    function handleDocSearchTransformItems(items) {
-        const isLocalhost = process.env.NODE_ENV !== 'production';
-
-        return items.map((item) => {
-            if (isLocalhost) {
-                const url = new URL(item.url);
-
-                url.protocol = window.location.protocol;
-                url.hostname = window.location.hostname;
-                url.port = window.location.port;
-                item.url = url.toString();
-            }
-
-            return item;
-        });
-    }
 
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
@@ -174,36 +142,13 @@ export default function Topbar(props) {
 
                 <ul className="flex list-none m-0 p-0 gap-2 align-items-center">
                     <li>
-                        <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} transformItems={handleDocSearchTransformItems} />
-                    </li>
-                    <li>
                         <a
-                            href="https://github.com/primefaces/primereact"
+                            href="https://github.com/WebArtWork/react-prime"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex flex-shrink-0 px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
                         >
                             <i className="pi pi-github text-700" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://discord.gg/gzKFYnpmCY"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex flex-shrink-0 px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
-                        >
-                            <i className="pi pi-discord text-700" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://github.com/orgs/primefaces/discussions"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex flex-shrink-0 px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
-                        >
-                            <i className="pi pi-comments text-700" />
                         </a>
                     </li>
                     <li>
@@ -231,7 +176,7 @@ export default function Topbar(props) {
                                 style={{ maxWidth: '8rem' }}
                                 className="px-link flex align-items-center surface-card h-2rem px-2 border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary"
                             >
-                                <span className="text-900 block white-space-nowrap overflow-hidden">{versions && versions.length ? versions[1].version : ''}</span>
+                                <span className="text-900 block white-space-nowrap overflow-hidden">{versions && versions.length ? versions[0].version : ''}</span>
                                 <span className="ml-2 pi pi-angle-down text-600" />
                             </button>
                         </StyleClass>

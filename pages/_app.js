@@ -3,7 +3,6 @@ import AppContentContext from '@/components/layout/appcontentcontext';
 import Layout from '@/components/layout/layout';
 import { PrimeReactProvider } from '@/components/lib/api/PrimeReactContext';
 import { switchTheme } from '@/components/utils/utils';
-import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useState } from 'react';

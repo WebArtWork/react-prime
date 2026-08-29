@@ -9021,12 +9021,212 @@ export const CustomerService = {
     },
 
     getCustomers(params) {
-        const queryParams = params
-            ? Object.keys(params)
-                  .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-                  .join('&')
-            : '';
+        const query = (params && params.lazyEvent ? JSON.parse(params.lazyEvent) : params) || {};
 
-        return fetch('/api/data/customers?' + queryParams).then((res) => res.json());
+        return fetch('/data/customers-large.json')
+            .then((res) => res.json())
+            .then((json) => {
+                let customers = json.data;
+
+                if (query.sortField && query.sortOrder) {
+                    customers = sortCustomers(query, customers);
+                }
+
+                if (query.filters) {
+                    for (let fieldName in query.filters) {
+                        if (query.filters[fieldName].value !== null) {
+                            customers = filterCustomers(customers, fieldName, query.filters[fieldName].value, query.filters[fieldName].matchMode);
+                        }
+                    }
+                }
+
+                return { customers: sliceCustomers(query, customers), totalRecords: customers.length };
+            });
     }
 };
+
+function sliceCustomers(query, customers) {
+    if (query.first != null && query.rows != null) {
+        const first = parseInt(query.first);
+        const rows = parseInt(query.rows);
+
+        return customers.slice(first, first + rows);
+    }
+
+    return customers;
+}
+
+function sortCustomers(query, customers) {
+    return [...customers].sort((data1, data2) => {
+        const value1 = resolveFieldData(data1, query.sortField);
+        const value2 = resolveFieldData(data2, query.sortField);
+        let result;
+
+        if (value1 == null && value2 != null) {
+            result = -1;
+        } else if (value1 != null && value2 == null) {
+            result = 1;
+        } else if (value1 == null && value2 == null) {
+            result = 0;
+        } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+            result = value1.localeCompare(value2);
+        } else {
+            result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        }
+
+        return query.sortOrder * result;
+    });
+}
+
+const customerFilters = {
+    startsWith: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || filterValue.trim() === '') {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase().slice(0, filterValue.length) === removeAccents(filterValue.toString()).toLocaleLowerCase();
+    },
+
+    contains: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || (typeof filterValue === 'string' && filterValue.trim() === '')) {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase().indexOf(removeAccents(filterValue.toString()).toLocaleLowerCase()) !== -1;
+    },
+
+    notContains: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || (typeof filterValue === 'string' && filterValue.trim() === '')) {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase().indexOf(removeAccents(filterValue.toString()).toLocaleLowerCase()) === -1;
+    },
+
+    endsWith: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || filterValue.trim() === '') {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        const stringValue = removeAccents(value.toString()).toLocaleLowerCase();
+        const compareValue = removeAccents(filterValue.toString()).toLocaleLowerCase();
+
+        return stringValue.indexOf(compareValue, stringValue.length - compareValue.length) !== -1;
+    },
+
+    equals: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || (typeof filterValue === 'string' && filterValue.trim() === '')) {
+            return true;
+        }
+
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        if (value.getTime && filterValue.getTime) {
+            return value.getTime() === filterValue.getTime();
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase() == removeAccents(filterValue.toString()).toLocaleLowerCase();
+    },
+
+    notEquals: (value, filterValue) => {
+        if (filterValue === undefined || filterValue === null || (typeof filterValue === 'string' && filterValue.trim() === '')) {
+            return false;
+        }
+
+        if (value === undefined || value === null) {
+            return true;
+        }
+
+        if (value.getTime && filterValue.getTime) {
+            return value.getTime() !== filterValue.getTime();
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase() != removeAccents(filterValue.toString()).toLocaleLowerCase();
+    }
+};
+
+function filterCustomers(value, field, filterValue, filterMatchMode) {
+    const filteredItems = [];
+
+    if (value) {
+        for (const item of value) {
+            const fieldValue = resolveFieldData(item, field);
+
+            if (customerFilters[filterMatchMode](fieldValue, filterValue)) {
+                filteredItems.push(item);
+            }
+        }
+    }
+
+    return filteredItems;
+}
+
+function removeAccents(str) {
+    if (str && str.search(/[\xC0-\xFF]/g) > -1) {
+        str = str
+            .replace(/[\xC0-\xC5]/g, 'A')
+            .replace(/[\xC6]/g, 'AE')
+            .replace(/[\xC7]/g, 'C')
+            .replace(/[\xC8-\xCB]/g, 'E')
+            .replace(/[\xCC-\xCF]/g, 'I')
+            .replace(/[\xD0]/g, 'D')
+            .replace(/[\xD1]/g, 'N')
+            .replace(/[\xD2-\xD6\xD8]/g, 'O')
+            .replace(/[\xD9-\xDC]/g, 'U')
+            .replace(/[\xDD]/g, 'Y')
+            .replace(/[\xDE]/g, 'P')
+            .replace(/[\xE0-\xE5]/g, 'a')
+            .replace(/[\xE6]/g, 'ae')
+            .replace(/[\xE7]/g, 'c')
+            .replace(/[\xE8-\xEB]/g, 'e')
+            .replace(/[\xEC-\xEF]/g, 'i')
+            .replace(/[\xF1]/g, 'n')
+            .replace(/[\xF2-\xF6\xF8]/g, 'o')
+            .replace(/[\xF9-\xFC]/g, 'u')
+            .replace(/[\xFE]/g, 'p')
+            .replace(/[\xFD\xFF]/g, 'y');
+    }
+
+    return str;
+}
+
+function resolveFieldData(data, field) {
+    if (data && field) {
+        if (field.indexOf('.') == -1) {
+            return data[field];
+        }
+
+        const fields = field.split('.');
+        let value = data;
+
+        for (let i = 0, len = fields.length; i < len; ++i) {
+            if (value == null) {
+                return null;
+            }
+
+            value = value[fields[i]];
+        }
+
+        return value;
+    }
+
+    return null;
+}

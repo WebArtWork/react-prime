@@ -76,7 +76,7 @@ export interface ScrollTopProps {
      */
     threshold?: number;
     /**
-     * Name of the icon or JSX.Element for icon.
+     * Name of the icon or React.JSX.Element for icon.
      */
     icon?: IconType<ScrollTopProps>;
     /**

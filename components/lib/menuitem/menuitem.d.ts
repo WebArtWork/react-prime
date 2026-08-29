@@ -70,7 +70,7 @@ export interface MenuItem {
      */
     label?: string | undefined;
     /**
-     * Icon of the item. It can be a string, JSX.Element or method.
+     * Icon of the item. It can be a string, React.JSX.Element or method.
      */
     icon?: any | undefined;
     /**

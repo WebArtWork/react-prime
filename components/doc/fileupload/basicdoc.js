@@ -7,14 +7,15 @@ import { useRef } from 'react';
 export function BasicDoc(props) {
     const toast = useRef(null);
 
-    const onUpload = () => {
+    const onUpload = ({ options }) => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        options.clear();
     };
 
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+<FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -31,7 +32,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+            <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} />
         </div>  
     )
 }
@@ -51,7 +52,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+            <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} />
         </div>  
     )
 }
@@ -67,7 +68,7 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+                <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} />
             </div>
             <DocSectionCode code={code} />
         </>

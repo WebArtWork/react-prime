@@ -5,7 +5,7 @@ import { FileUpload } from '@/components/lib/fileupload/FileUpload';
 export function AdvancedDoc(props) {
     const code = {
         basic: `
-<FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+<FileUpload name="demo[]" customUpload uploadHandler={(e) => e.options.clear()} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         `,
         javascript: `
 import React from 'react';
@@ -15,7 +15,7 @@ export default function AdvanceDemo() {
         
     return (
         <div className="card">
-            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" customUpload uploadHandler={(e) => e.options.clear()} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
     )
 }
@@ -29,7 +29,7 @@ export default function AdvanceDemo() {
         
     return (
         <div className="card">
-            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" customUpload uploadHandler={(e) => e.options.clear()} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
     )
 }
@@ -42,7 +42,7 @@ export default function AdvanceDemo() {
                 <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
             </DocSectionText>
             <div className="card">
-                <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+                <FileUpload name="demo[]" customUpload uploadHandler={(e) => e.options.clear()} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
             </div>
             <DocSectionCode code={code} />
         </>

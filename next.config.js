@@ -1,4 +1,5 @@
 module.exports = {
+    output: 'export',
     reactStrictMode: process.env.NODE_ENV === 'production' ? false : true,
     trailingSlash: true,
     env: {
@@ -20,14 +21,5 @@ module.exports = {
         });
 
         return config;
-    },
-    async redirects() {
-        return [
-            {
-                source: '/setup',
-                destination: '/installation',
-                permanent: true
-            }
-        ];
     }
 };

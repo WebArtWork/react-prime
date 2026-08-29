@@ -33,6 +33,7 @@ export function TemplateDoc(props) {
 
         setTotalSize(_totalSize);
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        e.options.clear();
     };
 
     const onTemplateRemove = (file, callback) => {
@@ -101,8 +102,8 @@ export function TemplateDoc(props) {
 <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
 <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-<FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-    onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+<FileUpload ref={fileUploadRef} name="demo[]" customUpload multiple accept="image/*" maxFileSize={1000000}
+    uploadHandler={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
     headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
     chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         `,
@@ -208,8 +209,8 @@ export default function TemplateDemo() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+            <FileUpload ref={fileUploadRef} name="demo[]" customUpload multiple accept="image/*" maxFileSize={1000000}
+                uploadHandler={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                 headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
                 chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
@@ -320,8 +321,8 @@ export default function TemplateDemo() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+            <FileUpload ref={fileUploadRef} name="demo[]" customUpload multiple accept="image/*" maxFileSize={1000000}
+                uploadHandler={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                 headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
                 chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
@@ -352,11 +353,11 @@ echo '<p>Fake Upload Process</p>'; ?>
                 <FileUpload
                     ref={fileUploadRef}
                     name="demo[]"
-                    url="/api/upload"
+                    customUpload
+                    uploadHandler={onTemplateUpload}
                     multiple
                     accept="image/*"
                     maxFileSize={1000000}
-                    onUpload={onTemplateUpload}
                     onSelect={onTemplateSelect}
                     onError={onTemplateClear}
                     onClear={onTemplateClear}

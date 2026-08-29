@@ -4,12 +4,15 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 import fs from 'fs-extra';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-import pkg from './package.json';
+import pkg from './package.json' with { type: 'json' };
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let entries = [];
 
@@ -334,21 +337,25 @@ function addPrimeReact() {
 function addPackageJson() {
     const outputDir = path.resolve(__dirname, process.env.OUTPUT_DIR);
     const packageJson = `{
-    "name": "primereact",
+    "name": "@wawjs/react-prime",
     "version": "${pkg.version}",
     "private": false,
-    "author": "PrimeTek Informatics",
-    "description": "PrimeReact is an open source UI library for React featuring a rich set of 90+ components, a theme designer, various theme alternatives such as Material, Bootstrap, Tailwind, premium templates and professional support. In addition, it integrates with PrimeBlock, which has 370+ ready to use UI blocks to build spectacular applications in no time.",
-    "homepage": "https://www.primereact.org",
+    "author": "Web Art Work",
+    "description": "react-prime is an independent MIT-licensed React UI component library continuing from the PrimeReact 10.9.9 codebase.",
+    "homepage": "https://github.com/WebArtWork/react-prime",
     "repository": {
         "type": "git",
-        "url": "https://github.com/primefaces/primereact.git"
+        "url": "https://github.com/WebArtWork/react-prime.git"
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/primefaces/primereact/issues"
+        "url": "https://github.com/WebArtWork/react-prime/issues"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "keywords": [
+        "react-prime",
         "primereact",
         "react",
         "hooks",

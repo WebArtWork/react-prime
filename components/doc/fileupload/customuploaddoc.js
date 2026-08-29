@@ -21,7 +21,7 @@ export function CustomUploadDoc(props) {
 
     const code = {
         basic: `
-<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+<FileUpload mode="basic" name="demo[]" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         `,
         javascript: `
 import React from 'react'; 
@@ -43,7 +43,7 @@ export default function CustomUploadDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+            <FileUpload mode="basic" name="demo[]" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         </div>
     )
 }
@@ -68,7 +68,7 @@ export default function CustomUploadDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+            <FileUpload mode="basic" name="demo[]" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         </div>
     )
 }
@@ -83,7 +83,7 @@ export default function CustomUploadDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+                <FileUpload mode="basic" name="demo[]" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
             <DocSectionCode code={code} />
         </>

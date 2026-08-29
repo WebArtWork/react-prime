@@ -7,14 +7,15 @@ import { useRef } from 'react';
 export function AutoDoc(props) {
     const toast = useRef(null);
 
-    const onUpload = () => {
+    const onUpload = ({ options }) => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        options && options.clear && options.clear();
     };
 
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+<FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} auto chooseLabel="Browse" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -24,14 +25,15 @@ import { FileUpload } from 'primereact/fileupload';
 export default function AutoDemo() {
     const toast = useRef(null);
 
-    const onUpload = () => {
+    const onUpload = ({ options }) => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        options && options.clear && options.clear();
     };
         
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+            <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} auto chooseLabel="Browse" />
         </div>  
     )
 }
@@ -44,14 +46,15 @@ import { FileUpload } from 'primereact/fileupload';
 export default function AutoDemo() {
     const toast = useRef<Toast>(null);
 
-    const onUpload = () => {
+    const onUpload = ({ options }) => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        options && options.clear && options.clear();
     };
         
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+            <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} auto chooseLabel="Browse" />
         </div>  
     )
 }
@@ -67,7 +70,7 @@ export default function AutoDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+                <FileUpload mode="basic" name="demo[]" customUpload uploadHandler={onUpload} accept="image/*" maxFileSize={1000000} auto chooseLabel="Browse" />
             </div>
             <DocSectionCode code={code} />
         </>

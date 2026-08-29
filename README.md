@@ -1,32 +1,47 @@
-# PrimeReact
+# react-prime
 
-> [!WARNING]
-> **This repository is no longer under active development and receives security fixes only.** PrimeReact continues as part of [PrimeUI](https://primeui.dev/nextchapter).
-> Issues here are read-only. Bug reports and feature requests belong at PrimeUI; for security vulnerabilities, see [SECURITY.md](./SECURITY.md).
+**An MIT-licensed React UI component library continuing from the PrimeReact 10.9.9 codebase.**
 
-### The next chapter has begun.
+### About react-prime
 
-After years as an open source library, PrimeReact enters its next chapter as part of **PrimeUI**, a sustainable foundation for the libraries you rely on.
+react-prime is an independent, free and open-source React UI library maintained by Web Art Work and contributors.
 
-## What this means
+The project continues development from the MIT-licensed PrimeReact 10.9.9 codebase and will remain MIT licensed.
 
-**Existing MIT versions remain MIT, forever.**
-Every release published under the MIT license stays exactly as it is. Your existing projects are unaffected. Nothing is taken away.
+### Why this project exists
 
-**Security updates continue here.**
-We keep publishing security fixes for the MIT-licensed releases. How to report one is in [SECURITY.md](./SECURITY.md).
+We love and greatly appreciate the work created by the PrimeReact team and community over the years.
 
-**Development continues at a new home.**
-Active development, new releases, and everything ahead now live under PrimeUI.
+**We hoped to see PrimeReact continue as an open-source MIT-licensed project. When that direction changed, we decided to continue the final MIT-licensed 10.9.9 codebase independently as react-prime.**
 
-➡️ **Read the announcement:** [primeui.dev/nextchapter](https://primeui.dev/nextchapter)
+Our goal is to preserve and build upon the substantial work already contributed by the PrimeReact team and community instead of starting another React UI library from zero.
 
-➡️ **The journey continues at:** [primereact.dev](https://primereact.dev)
+### Installation
 
-## Thank you
+```bash
+npm install @wawjs/react-prime
+```
+
+### Development
+
+This repository uses npm. With a supported Node.js version installed:
+
+```bash
+npm install
+npm run dev
+```
+
+Useful commands include:
+
+* `npm run build` &ndash; builds the static documentation site (deployed to GitHub Pages)
+* `npm run build:lib` / `npm run build:lib:windows` &ndash; builds the publishable `@wawjs/react-prime` package
+* `npm run format` / `npm run format:check` &ndash; Prettier formatting
+* `npm run type:check` &ndash; TypeScript checks for the API generation scripts
+
+### License
+
+MIT, see [LICENSE.md](./LICENSE.md). Original work Copyright (c) 2016-2026 PrimeTek; modifications and ongoing development Copyright (c) 2026 Web Art Work.
+
+### Thank you
 
 To everyone who used PrimeReact, filed an issue, opened a pull request, answered a question, or simply built something with it, thank you. This library reached hundreds of millions of downloads because of you.
-
-The next chapter is just beginning, and we hope you'll be part of it.
-
-The PrimeTek Team

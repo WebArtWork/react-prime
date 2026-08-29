@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    if: github.repository == 'primefaces/primereact' && github.ref == 'refs/heads/master'
+    if: github.repository == 'WebArtWork/react-prime' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     strategy:

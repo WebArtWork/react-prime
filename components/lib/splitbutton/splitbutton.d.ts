@@ -140,7 +140,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     loading?: boolean | undefined;
     /**
-     * Name of the loading icon or JSX.Element for loading icon.
+     * Name of the loading icon or React.JSX.Element for loading icon.
      */
     loadingIcon?: IconType<SplitButtonProps> | undefined;
     /**
@@ -203,7 +203,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Name of the dropdown icon or JSX.Element for dropdown icon.
+     * Name of the dropdown icon or React.JSX.Element for dropdown icon.
      */
     dropdownIcon?: IconType<SplitButtonProps> | undefined;
     /**

@@ -96,7 +96,7 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     disabled?: boolean | undefined;
     /**
-     * Name of the icon or JSX.Element for icon.
+     * Name of the icon or React.JSX.Element for icon.
      */
     icon?: IconType<ButtonProps> | undefined;
     /**
@@ -147,7 +147,7 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     loading?: boolean | undefined;
     /**
-     * Name of the loading icon or JSX.Element for loading icon.
+     * Name of the loading icon or React.JSX.Element for loading icon.
      */
     loadingIcon?: IconType<ButtonProps> | undefined;
     /**
