@@ -1,6 +1,10 @@
-The MIT License (MIT)
+MIT License
 
-Copyright (c) 2016-2025 PrimeTek
+Original work:
+Copyright (c) 2016-2026 PrimeTek
+
+Modifications and ongoing development:
+Copyright (c) 2026 Web Art Work
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
