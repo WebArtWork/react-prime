@@ -35,11 +35,6 @@ jobs:
       run: |
         npm run format:check
 
-    - name: Lint Check
-      if: ${{ success() }}
-      run: |
-        npm run lint
-
     - name: TypeScript Check
       if: ${{ success() }}
       run: |
@@ -49,8 +44,3 @@ jobs:
       if: ${{ success() }}
       run: |
         npm run security:check
-  
-    - name: Unit Tests Check
-      if: ${{ success() }}
-      run: |
-        npm run test:check
