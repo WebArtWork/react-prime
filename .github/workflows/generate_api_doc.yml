@@ -5,7 +5,7 @@ on:
     branches: [ master ]
     paths:
       - '**/**/*.d.ts'
-      - 'api-generator/build-apidoc.js'
+      - 'api-scripts/build-apidoc.js'
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [24.x]
 
     steps:
     - uses: actions/checkout@v6
